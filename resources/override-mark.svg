@@ -1,0 +1,6 @@
+<svg width="256px" height="256px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="48" fill="#8cd3ec" stroke="#42545c" stroke-width="3" />
+  <text x="50" y="65" font-size="45" text-anchor="middle" style="font-family: Menlo, Monaco, Consolas, &quot;Droid Sans Mono&quot;, &quot;Inconsolata&quot;, &quot;Courier New&quot;, monospace, &quot;Droid Sans Fallback&quot;;font-weight: bold;" fill="#42545c">
+    I|O
+  </text>
+</svg>
