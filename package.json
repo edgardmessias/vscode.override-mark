@@ -1,0 +1,240 @@
+{
+    "publisher": "EdgardMessias",
+    "name": "override-decorator",
+    "displayName": "Clipboard Manager",
+    "description": "Clipboard Manager",
+    "version": "1.4.2",
+    "icon": "media/clipboard.png",
+    "extensionKind": "ui",
+    "engines": {
+        "vscode": "^1.26.0"
+    },
+    "bugs": {
+        "url": "https://github.com/edgardmessias/vscode.override-decorator/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/edgardmessias/vscode.override-decorator.git"
+    },
+    "homepage": "https://github.com/edgardmessias/vscode.override-decorator",
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "clipboard",
+        "copy",
+        "ditto",
+        "history",
+        "paste"
+    ],
+    "activationEvents": [
+        "*"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "override-decorator",
+                    "title": "Clipboard Manager",
+                    "icon": "media/clipboard.svg"
+                }
+            ]
+        },
+        "views": {
+            "override-decorator": [
+                {
+                    "id": "clipboardHistory",
+                    "name": "Clipboard History"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "override-decorator.editor.copyToHistory",
+                "title": "Copy to Clipboard History",
+                "category": "Clipboard Manager"
+            },
+            {
+                "command": "override-decorator.editor.pickAndPaste",
+                "title": "Pick and Paste",
+                "category": "Clipboard Manager"
+            },
+            {
+                "command": "override-decorator.editor.showClipboardInFile",
+                "title": "Show in the file",
+                "category": "Clipboard Manager"
+            },
+            {
+                "command": "override-decorator.history.clear",
+                "title": "Clear History",
+                "category": "Clipboard Manager",
+                "icon": {
+                    "dark": "resources/dark/clear-history.svg",
+                    "light": "resources/light/clear-history.svg"
+                }
+            },
+            {
+                "command": "override-decorator.history.remove",
+                "title": "Remove",
+                "category": "Clipboard Manager",
+                "icon": {
+                    "dark": "resources/dark/remove.svg",
+                    "light": "resources/light/remove.svg"
+                }
+            }
+        ],
+        "menus": {
+            "commandPalette": [
+                {
+                    "command": "override-decorator.editor.pickAndPaste",
+                    "when": "editorFocus && !editorReadonly"
+                },
+                {
+                    "command": "override-decorator.editor.showClipboardInFile",
+                    "when": "false"
+                },
+                {
+                    "command": "override-decorator.history.clear"
+                },
+                {
+                    "command": "override-decorator.history.remove",
+                    "when": "false"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "override-decorator.editor.showClipboardInFile",
+                    "when": "viewItem =~ /^clipHistoryItem:file/",
+                    "group": "0_navigation"
+                },
+                {
+                    "command": "override-decorator.history.remove",
+                    "when": "viewItem =~ /^clipHistoryItem:/",
+                    "group": "1_modification"
+                },
+                {
+                    "command": "override-decorator.history.remove",
+                    "when": "viewItem =~ /^clipHistoryItem:/",
+                    "group": "inline"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "override-decorator.history.clear",
+                    "when": "view == clipboardHistory",
+                    "group": "navigation"
+                }
+            ]
+        },
+        "keybindings": [
+            {
+                "command": "override-decorator.editor.copyToHistory",
+                "key": "Ctrl+Shift+C",
+                "mac": "Cmd+Shift+C",
+                "when": "textInputFocus && !editorReadonly"
+            },
+            {
+                "command": "override-decorator.editor.pickAndPaste",
+                "key": "Ctrl+Shift+V",
+                "mac": "Cmd+Shift+V",
+                "when": "textInputFocus && !editorReadonly"
+            }
+        ],
+        "configuration": [
+            {
+                "title": "Clipboard Manager",
+                "properties": {
+                    "override-decorator.avoidDuplicates": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Avoid duplicate clips in the list"
+                    },
+                    "override-decorator.checkInterval": {
+                        "type": "integer",
+                        "default": 500,
+                        "description": "Time in milliseconds to check changes in clipboard. Set zero to disable."
+                    },
+                    "override-decorator.maxClipboardSize": {
+                        "type": "integer",
+                        "default": 1000000,
+                        "description": "Maximum clipboard size in bytes."
+                    },
+                    "override-decorator.maxClips": {
+                        "type": "integer",
+                        "default": 100,
+                        "description": "Maximum number of clips to save in clipboard"
+                    },
+                    "override-decorator.moveToTop": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Move used clip to top in the list"
+                    },
+                    "override-decorator.onlyWindowFocused": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Get clips only from VSCode"
+                    },
+                    "override-decorator.preview": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "View a preview while you are choosing the clip"
+                    },
+                    "override-decorator.saveTo": {
+                        "type": [
+                            "string",
+                            "null",
+                            "boolean"
+                        ],
+                        "default": null,
+                        "description": "Set location to save the clipboard file, set false to disable",
+                        "scope": "application"
+                    },
+                    "override-decorator.snippet.enabled": {
+                        "scope": "resource",
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Enable completion snippets"
+                    },
+                    "override-decorator.snippet.max": {
+                        "scope": "resource",
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum number of clips to suggests in snippets (Zero for all)"
+                    },
+                    "override-decorator.snippet.prefix": {
+                        "scope": "resource",
+                        "type": "string",
+                        "default": "clip",
+                        "description": "Default prefix for snippets completion (clip1, clip2, ...)"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "clean": "rimraf ./out ./coverage ./test-reports",
+        "compile": "tsc -p ./",
+        "lint": "eslint -c .eslintrc.js --ext .ts src",
+        "test": "npm run compile && node ./out/test/runTests.js",
+        "vscode:prepublish": "npm run clean && npm run compile",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/glob": "^7.1.1",
+        "@types/node": "~8.10.59",
+        "@types/vscode": "1.26.0",
+        "@typescript-eslint/eslint-plugin": "^2.33.0",
+        "@typescript-eslint/parser": "^2.33.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "glob": "^7.1.6",
+        "original-fs": "^1.1.0",
+        "prettier": "^2.0.5",
+        "rimraf": "^3.0.2",
+        "typescript": "^3.9.2",
+        "vscode-test": "^1.3.0"
+    },
+    "dependencies": {}
+}
