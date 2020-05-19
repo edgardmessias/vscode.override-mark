@@ -77,17 +77,12 @@ export class CompilerHost implements BaseCompilerHost {
   }
 
   createProgram(documents: vscode.TextDocument | vscode.TextDocument[]) {
-
     if (!Array.isArray(documents)) {
       documents = [documents];
     }
 
     const rootNames = documents.map(d => d.fileName);
 
-    return tsModule.createProgram(
-      rootNames,
-      this.compilerOptions,
-      this
-    )
+    return tsModule.createProgram(rootNames, this.compilerOptions, this);
   }
 }

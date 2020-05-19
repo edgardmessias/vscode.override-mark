@@ -35,13 +35,17 @@ function isSomeClassElement(el: Node): el is AllClassElements {
 }
 
 function isStaticMember(node: Declaration): boolean {
-  return (tsModule.getCombinedModifierFlags(node) & tsModule.ModifierFlags.Static) !== 0;
+  return (
+    (tsModule.getCombinedModifierFlags(node) &
+      tsModule.ModifierFlags.Static) !==
+    0
+  );
 }
 
 export interface WalkResult {
-  hasSource: boolean,
-  overrideRanges: vscode.Range[],
-  implementRanges: vscode.Range[],
+  hasSource: boolean;
+  overrideRanges: vscode.Range[];
+  implementRanges: vscode.Range[];
 }
 
 export class Walker {
@@ -52,12 +56,11 @@ export class Walker {
   }
 
   public walk(document: vscode.TextDocument): WalkResult {
-
     const result: WalkResult = {
       hasSource: false,
       implementRanges: [],
       overrideRanges: [],
-    }
+    };
 
     const sourceFile = this._program.getSourceFile(document.fileName);
 
@@ -77,7 +80,11 @@ export class Walker {
     return result;
   }
 
-  private checkClassElement(element: AllClassElements, document: vscode.TextDocument, result: WalkResult) {
+  private checkClassElement(
+    element: AllClassElements,
+    document: vscode.TextDocument,
+    result: WalkResult
+  ) {
     switch (element.kind) {
       case tsModule.SyntaxKind.Constructor:
         this.checkConstructorDeclaration(element, document, result);
@@ -91,7 +98,11 @@ export class Walker {
     }
   }
 
-  private checkConstructorDeclaration(node: ConstructorDeclaration, document: vscode.TextDocument, result: WalkResult) {
+  private checkConstructorDeclaration(
+    node: ConstructorDeclaration,
+    document: vscode.TextDocument,
+    result: WalkResult
+  ) {
     if (!node.parent || node.parent.heritageClauses === undefined) {
       return;
     }
@@ -112,17 +123,25 @@ export class Walker {
     let pos = node.getStart();
     let end = node.getStart();
 
-    const contructorKeyword = node.getChildren().find(n => n.kind === tsModule.SyntaxKind.ConstructorKeyword);
+    const contructorKeyword = node
+      .getChildren()
+      .find(n => n.kind === tsModule.SyntaxKind.ConstructorKeyword);
 
     if (contructorKeyword) {
       pos = contructorKeyword.getStart();
       end = contructorKeyword.getEnd();
     }
 
-    result.overrideRanges.push(new vscode.Range(document.positionAt(pos), document.positionAt(end)));
+    result.overrideRanges.push(
+      new vscode.Range(document.positionAt(pos), document.positionAt(end))
+    );
   }
 
-  private checkOverrideableElementDeclaration(node: OverrideableElement, document: vscode.TextDocument, result: WalkResult) {
+  private checkOverrideableElementDeclaration(
+    node: OverrideableElement,
+    document: vscode.TextDocument,
+    result: WalkResult
+  ) {
     if (isStaticMember(node)) {
       return;
     }
@@ -146,8 +165,9 @@ export class Walker {
 
   private checkHeritageChain(
     declaration: ClassDeclaration | ClassExpression,
-    node: OverrideableElement
-    , document: vscode.TextDocument, result: WalkResult
+    node: OverrideableElement,
+    document: vscode.TextDocument,
+    result: WalkResult
   ) {
     const currentDeclaration = declaration;
     if (currentDeclaration === undefined) {
@@ -158,14 +178,15 @@ export class Walker {
       return;
     }
     for (const clause of clauses) {
-      const isInterface = clause.token === tsModule.SyntaxKind.ImplementsKeyword;
+      const isInterface =
+        clause.token === tsModule.SyntaxKind.ImplementsKeyword;
       for (const typeNode of clause.types) {
         const type = this._checker.getTypeAtLocation(typeNode);
         for (const symb of type.getProperties()) {
           if (symb.name === node.name.getText()) {
             const range = new vscode.Range(
               document.positionAt(node.name.getStart()),
-              document.positionAt(node.name.getEnd()),
+              document.positionAt(node.name.getEnd())
             );
 
             if (isInterface) {
