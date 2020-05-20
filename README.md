@@ -18,7 +18,7 @@
 [![Average time to resolve an issue](https://isitmaintained.com/badge/resolution/edgardmessias/vscode.override-mark.svg)](https://isitmaintained.com/project/edgardmessias/vscode.override-mark "Average time to resolve an issue")
 [![Percentage of issues still open](https://isitmaintained.com/badge/open/edgardmessias/vscode.override-mark.svg)](https://isitmaintained.com/project/edgardmessias/vscode.override-mark "Percentage of issues still open")
 
-Show a gutter icon when implement/override a method/property in javascript or typescript.
+Show a gutter icon when you implement/override a method/property in javascript or typescript.
 
 ## Features
 
