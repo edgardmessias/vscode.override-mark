@@ -76,6 +76,27 @@ export class CompilerHost implements BaseCompilerHost {
     return this._host.readFile(fileName);
   }
 
+  directoryExists(directoryName: string) {
+    if (this._host.directoryExists) {
+      return this._host.directoryExists(directoryName);
+    }
+    return tsModule.sys.directoryExists(directoryName);
+  }
+
+  getDirectories(path: string) {
+    if (this._host.getDirectories) {
+      return this._host.getDirectories(path);
+    }
+    return tsModule.sys.getDirectories(path);
+  }
+
+  readDirectory(rootDir: string, extensions: readonly string[], excludes: readonly string[] | undefined, includes: readonly string[], depth?: number) {
+    if (this._host.readDirectory) {
+      return this._host.readDirectory(rootDir, extensions, excludes, includes, depth);
+    }
+    return tsModule.sys.readDirectory(rootDir, extensions, excludes, includes, depth);
+  }
+
   createProgram(documents: vscode.TextDocument | vscode.TextDocument[]) {
     if (!Array.isArray(documents)) {
       documents = [documents];
