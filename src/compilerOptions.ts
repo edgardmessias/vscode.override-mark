@@ -3,6 +3,7 @@ import { tsModule } from "./vscodeModules";
 
 const compilerOptions: CompilerOptions = {
   allowNonTsExtensions: true,
+  allowSyntheticDefaultImports: true,
   allowJs: true,
   lib: ["lib.es6.d.ts"],
   target: tsModule.ScriptTarget.Latest,
