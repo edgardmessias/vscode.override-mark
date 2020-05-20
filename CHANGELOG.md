@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/edgardmessias/vscode.override-mark/compare/v1.0.2...v1.0.3) (2020-05-20)
+
+
+### Bug Fixes
+
+* Works with synthetic default imports ([bae0c29](https://github.com/edgardmessias/vscode.override-mark/commit/bae0c29716a6f51491ccd9451c7d266007d4da0f))
+
+
+
 ## [1.0.2](https://github.com/edgardmessias/vscode.override-mark/compare/v1.0.1...v1.0.2) (2020-05-19)
 
 
