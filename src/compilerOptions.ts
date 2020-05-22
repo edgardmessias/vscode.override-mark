@@ -5,7 +5,7 @@ const compilerOptions: CompilerOptions = {
   allowNonTsExtensions: true,
   allowSyntheticDefaultImports: true,
   allowJs: true,
-  lib: ["lib.es6.d.ts"],
+  //lib: ["lib.es6.d.ts"],
   target: tsModule.ScriptTarget.Latest,
   moduleResolution: tsModule.ModuleResolutionKind.NodeJs,
   experimentalDecorators: true,
