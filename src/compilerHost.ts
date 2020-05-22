@@ -17,6 +17,12 @@ export class CompilerHost implements BaseCompilerHost {
     } else {
       this._host = tsModule.createCompilerHost(compilerOptions);
     }
+
+    for (const prop of Object.keys(this._host)) {
+      if (!(prop in this)) {
+        (this as any)[prop] = (this._host as any)[prop];
+      }
+    }
   }
 
   getSourceFile(
@@ -90,11 +96,29 @@ export class CompilerHost implements BaseCompilerHost {
     return tsModule.sys.getDirectories(path);
   }
 
-  readDirectory(rootDir: string, extensions: readonly string[], excludes: readonly string[] | undefined, includes: readonly string[], depth?: number) {
+  readDirectory(
+    rootDir: string,
+    extensions: readonly string[],
+    excludes: readonly string[] | undefined,
+    includes: readonly string[],
+    depth?: number
+  ) {
     if (this._host.readDirectory) {
-      return this._host.readDirectory(rootDir, extensions, excludes, includes, depth);
+      return this._host.readDirectory(
+        rootDir,
+        extensions,
+        excludes,
+        includes,
+        depth
+      );
     }
-    return tsModule.sys.readDirectory(rootDir, extensions, excludes, includes, depth);
+    return tsModule.sys.readDirectory(
+      rootDir,
+      extensions,
+      excludes,
+      includes,
+      depth
+    );
   }
 
   createProgram(documents: vscode.TextDocument | vscode.TextDocument[]) {
