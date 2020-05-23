@@ -6,6 +6,7 @@ import {
   SourceFile,
 } from "typescript";
 import { tsModule } from "./vscodeModules";
+import { isSamePath } from "./util";
 
 export class CompilerHost implements BaseCompilerHost {
   private _host: BaseCompilerHost;
@@ -31,8 +32,8 @@ export class CompilerHost implements BaseCompilerHost {
     onError?: ((message: string) => void) | undefined,
     shouldCreateNewSourceFile?: boolean | undefined
   ): SourceFile | undefined {
-    const document = vscode.workspace.textDocuments.find(
-      d => d.fileName.replace(/\\/g, "/") === fileName.replace(/\\/g, "/")
+    const document = vscode.workspace.textDocuments.find(d =>
+      isSamePath(d.fileName, fileName)
     );
 
     if (document) {

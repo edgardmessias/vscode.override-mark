@@ -50,7 +50,13 @@
         "configuration": [
             {
                 "title": "Override Mark",
-                "properties": {}
+                "properties": {
+                    "override-mark.delay": {
+                        "type": "integer",
+                        "description": "The delay in milliseconds between when a change occurs and when a mark update is performed.",
+                        "default": 500
+                    }
+                }
             }
         ]
     },

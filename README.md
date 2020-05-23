@@ -33,7 +33,8 @@ This extension contributes the following settings (default values):
 <!--begin-settings-->
 ```js
 {
-
+  // The delay in milliseconds between when a change occurs and when a mark update is performed.
+  "override-mark.delay": 500
 }
 ```
 <!--end-settings-->
