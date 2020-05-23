@@ -24,6 +24,7 @@ Show a gutter icon when you implement/override a method/property in javascript o
 
 1. Show a gutter icon for implemented method or property
 1. Show a gutter icon for overrode method or property
+1. Delay option
 1. New feature are coming...
 
 ## Extension Settings
