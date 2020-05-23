@@ -5,6 +5,7 @@ import { getCompilerOptions } from "../compilerOptions";
 import { CompilerHost } from "../compilerHost";
 import { CompilerOptions, Program } from "typescript";
 import { Walker } from "../walker";
+import { DecorationType } from "../overrider-mark";
 
 suiteSetup(async function () {
   if (!(await activateExtension())) {
@@ -81,7 +82,10 @@ suite("Extension Tests", function () {
 
     const result = walker.walk(document);
 
-    assert.equal(result.overrideRanges.length, 6);
-    assert.equal(result.implementRanges.length, 4);
+    const override = result.filter(r => r.type === DecorationType.override);
+    assert.equal(override.length, 6);
+
+    const implement = result.filter(r => r.type === DecorationType.implement);
+    assert.equal(implement.length, 4);
   });
 });

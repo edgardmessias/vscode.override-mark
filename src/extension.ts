@@ -1,49 +1,30 @@
 import * as vscode from "vscode";
-import { Walker } from "./walker";
-import { CompilerHost } from "./compilerHost";
-import * as decoration from "./decoration";
-import { getCompilerOptions } from "./compilerOptions";
-import { IDisposable, isSamePath } from "./util";
+import { IDisposable } from "./util";
 import { WorkspaceWatcher } from "./workspaceWatcher";
+import { DocumentMarkProcessor } from "./documentMarkProcessor";
+import { TypescriptProvider } from "./typescriptProvider";
+import { OverrideApiMark } from "./overrider-mark";
 
 // this method is called when your extension is activated
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): OverrideApiMark {
   const disposable: IDisposable[] = [];
 
-  const compilerOptions = getCompilerOptions();
-
-  const host = new CompilerHost(compilerOptions);
-
   const workspaceWatcher = new WorkspaceWatcher();
+  disposable.push(workspaceWatcher);
 
-  const updateMarks = (documents: vscode.TextDocument[]) => {
-    const program = host.createProgram(documents);
+  const documentMarkProcessor = new DocumentMarkProcessor();
+  disposable.push(documentMarkProcessor);
 
-    const walker = new Walker(program);
+  const typescriptProvider = new TypescriptProvider();
+  disposable.push(typescriptProvider);
 
-    for (const document of documents) {
-      const textEditor = vscode.window.visibleTextEditors.find(t =>
-        isSamePath(t.document.fileName, document.fileName)
-      );
+  documentMarkProcessor.addProvider(typescriptProvider);
 
-      if (!textEditor) {
-        continue;
-      }
-
-      const result = walker.walk(document);
-
-      textEditor.setDecorations(
-        decoration.getOverrideDecoration(),
-        result.overrideRanges
-      );
-      textEditor.setDecorations(
-        decoration.getImplementDecoration(),
-        result.implementRanges
-      );
-    }
-  };
-
-  disposable.push(workspaceWatcher.onDidChangeTextDocuments(updateMarks));
+  disposable.push(
+    workspaceWatcher.onDidChangeTextDocuments(documents => {
+      documentMarkProcessor.updateDecorations(documents);
+    })
+  );
 
   const getDelay = () =>
     vscode.workspace
@@ -52,15 +33,28 @@ export function activate(context: vscode.ExtensionContext) {
 
   workspaceWatcher.delay = getDelay();
 
-  vscode.workspace.onDidChangeConfiguration(e => {
-    if (e.affectsConfiguration("override-mark")) {
-      workspaceWatcher.delay = getDelay();
-    }
-  });
+  disposable.push(
+    vscode.workspace.onDidChangeConfiguration(e => {
+      if (e.affectsConfiguration("override-mark")) {
+        workspaceWatcher.delay = getDelay();
+      }
+    })
+  );
 
+  // start watch documents changes
   workspaceWatcher.start();
+  workspaceWatcher.queueVisibleDocuments();
 
+  // Update after new provider
+  documentMarkProcessor.onDidAddProvider(() => {
+    workspaceWatcher.queueVisibleDocuments();
+  });
+  // Update opened documents
   context.subscriptions.push(...disposable);
+
+  return {
+    addProvider: provider => documentMarkProcessor.addProvider(provider),
+  };
 }
 
 // this method is called when your extension is deactivated

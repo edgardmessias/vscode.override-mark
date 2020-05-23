@@ -40,6 +40,13 @@ export class WorkspaceWatcher implements IDisposable {
         }
       })
     );
+
+    this._disposables.push(
+      vscode.window.onDidChangeVisibleTextEditors(textEditors => {
+        this.queueTextDocument(textEditors.map(t => t.document));
+      })
+    );
+
     this._disposables.push(
       toDisposable(() => {
         clearTimeout(this._updateDocumentTimer!);
@@ -72,13 +79,28 @@ export class WorkspaceWatcher implements IDisposable {
     }, this._delay);
   }
 
-  public queueTextDocument(document: vscode.TextDocument) {
+  public queueTextDocument(
+    documents: vscode.TextDocument | vscode.TextDocument[]
+  ) {
     if (!this._started) {
       return;
     }
 
-    this._documentsToUpdate.set(document.fileName, document);
+    if (!Array.isArray(documents)) {
+      documents = [documents];
+    }
+
+    for (const document of documents) {
+      this._documentsToUpdate.set(document.fileName, document);
+    }
+
     this.resetTimer();
+  }
+
+  public queueVisibleDocuments() {
+    this.queueTextDocument(
+      vscode.window.visibleTextEditors.map(t => t.document)
+    );
   }
 
   start() {

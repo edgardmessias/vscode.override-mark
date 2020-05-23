@@ -1,20 +1,21 @@
 /* eslint-disable prettier/prettier */
 import {
-  MethodDeclaration,
-  PropertyDeclaration,
-  GetAccessorDeclaration,
-  SetAccessorDeclaration,
-  IndexSignatureDeclaration,
-  ConstructorDeclaration,
-  Node,
-  TypeChecker,
   ClassDeclaration,
   ClassExpression,
+  ConstructorDeclaration,
   Declaration,
+  GetAccessorDeclaration,
+  IndexSignatureDeclaration,
+  MethodDeclaration,
+  Node,
   Program,
+  PropertyDeclaration,
+  SetAccessorDeclaration,
+  TypeChecker,
 } from "typescript";
-import { tsModule } from "./vscodeModules";
 import * as vscode from "vscode";
+import { DecorationType, MarkOptions } from "./overrider-mark";
+import { tsModule } from "./vscodeModules";
 
 type AllClassElements =
   | MethodDeclaration
@@ -42,12 +43,6 @@ function isStaticMember(node: Declaration): boolean {
   );
 }
 
-export interface WalkResult {
-  hasSource: boolean;
-  overrideRanges: vscode.Range[];
-  implementRanges: vscode.Range[];
-}
-
 export class Walker {
   private _checker: TypeChecker;
 
@@ -55,19 +50,14 @@ export class Walker {
     this._checker = this._program.getTypeChecker();
   }
 
-  public walk(document: vscode.TextDocument): WalkResult {
-    const result: WalkResult = {
-      hasSource: false,
-      implementRanges: [],
-      overrideRanges: [],
-    };
+  public walk(document: vscode.TextDocument): MarkOptions[] {
+    const result: MarkOptions[] = [];
 
     const sourceFile = this._program.getSourceFile(document.fileName);
 
     if (!sourceFile) {
       return result;
     }
-    result.hasSource = true;
 
     const cb = (node: Node): void => {
       if (isSomeClassElement(node)) {
@@ -83,7 +73,7 @@ export class Walker {
   private checkClassElement(
     element: AllClassElements,
     document: vscode.TextDocument,
-    result: WalkResult
+    result: MarkOptions[]
   ) {
     switch (element.kind) {
       case tsModule.SyntaxKind.Constructor:
@@ -101,7 +91,7 @@ export class Walker {
   private checkConstructorDeclaration(
     node: ConstructorDeclaration,
     document: vscode.TextDocument,
-    result: WalkResult
+    result: MarkOptions[]
   ) {
     if (!node.parent || node.parent.heritageClauses === undefined) {
       return;
@@ -132,15 +122,19 @@ export class Walker {
       end = contructorKeyword.getEnd();
     }
 
-    result.overrideRanges.push(
-      new vscode.Range(document.positionAt(pos), document.positionAt(end))
-    );
+    result.push({
+      type: DecorationType.override,
+      range: new vscode.Range(
+        document.positionAt(pos),
+        document.positionAt(end)
+      ),
+    });
   }
 
   private checkOverrideableElementDeclaration(
     node: OverrideableElement,
     document: vscode.TextDocument,
-    result: WalkResult
+    result: MarkOptions[]
   ) {
     if (isStaticMember(node)) {
       return;
@@ -167,7 +161,7 @@ export class Walker {
     declaration: ClassDeclaration | ClassExpression,
     node: OverrideableElement,
     document: vscode.TextDocument,
-    result: WalkResult
+    result: MarkOptions[]
   ) {
     const currentDeclaration = declaration;
     if (currentDeclaration === undefined) {
@@ -188,9 +182,10 @@ export class Walker {
               document.positionAt(node.name.getStart()),
               document.positionAt(node.name.getEnd())
             );
+            let type = DecorationType.override;
 
             if (isInterface) {
-              result.implementRanges.push(range);
+              type = DecorationType.implement;
             } else {
               const isAbstract = symb.declarations.some(d => {
                 return (
@@ -202,11 +197,10 @@ export class Walker {
               });
 
               if (isAbstract) {
-                result.implementRanges.push(range);
-              } else {
-                result.overrideRanges.push(range);
+                type = DecorationType.implement;
               }
             }
+            result.push({ type, range });
           }
         }
       }
