@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/edgardmessias/vscode.override-mark/compare/v1.0.3...v1.1.0) (2020-05-23)
+
+
+### Features
+
+* Added delay option ([daaa616](https://github.com/edgardmessias/vscode.override-mark/commit/daaa616cd93f1b4b8062dc2e649b5fec80fe351c))
+* Added support API to custom language ([2297f18](https://github.com/edgardmessias/vscode.override-mark/commit/2297f182c782b1a916dd74c4220b6cbcdb57ed9d))
+
+
+
 ## [1.0.3](https://github.com/edgardmessias/vscode.override-mark/compare/v1.0.2...v1.0.3) (2020-05-20)
 
 
