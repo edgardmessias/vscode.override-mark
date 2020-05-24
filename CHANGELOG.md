@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/edgardmessias/vscode.override-mark/compare/v1.1.0...v1.1.1) (2020-05-24)
+
+
+### Bug Fixes
+
+* Use async update ([420c18d](https://github.com/edgardmessias/vscode.override-mark/commit/420c18dc94a3d7429f346bb23708d3dab2f27f19))
+
+
+
 # [1.1.0](https://github.com/edgardmessias/vscode.override-mark/compare/v1.0.3...v1.1.0) (2020-05-23)
 
 

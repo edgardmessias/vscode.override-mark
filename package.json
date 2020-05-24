@@ -3,7 +3,7 @@
     "name": "override-mark",
     "displayName": "Override Mark",
     "description": "Show a gutter icon when has a implement/override method/property in javascript or typescript.",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "icon": "resources/override-mark.png",
     "extensionKind": "ui",
     "engines": {
