@@ -3,10 +3,10 @@ import { IDisposable } from "./util";
 import { WorkspaceWatcher } from "./workspaceWatcher";
 import { DocumentMarkProcessor } from "./documentMarkProcessor";
 import { TypescriptProvider } from "./typescriptProvider";
-import { OverrideApiMark } from "./overrider-mark";
+import { OverrideMarkApi } from "./overrider-mark";
 
 // this method is called when your extension is activated
-export function activate(context: vscode.ExtensionContext): OverrideApiMark {
+export function activate(context: vscode.ExtensionContext): OverrideMarkApi {
   const disposable: IDisposable[] = [];
 
   const workspaceWatcher = new WorkspaceWatcher();

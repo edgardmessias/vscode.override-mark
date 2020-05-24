@@ -16,6 +16,6 @@ export interface Provider {
   getDecoration?(type: DecorationType): vscode.TextEditorDecorationType;
 }
 
-export interface OverrideApiMark {
+export interface OverrideMarkApi {
   addProvider(provider: Provider): void;
 }
