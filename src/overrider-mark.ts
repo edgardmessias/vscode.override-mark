@@ -12,7 +12,7 @@ export interface MarkOptions extends vscode.DecorationOptions {
 export type DocumentsMarks = Map<string, MarkOptions[]>;
 
 export interface Provider {
-  getDocumentsMarks(documents: vscode.TextDocument[]): DocumentsMarks;
+  getDocumentsMarks(documents: vscode.TextDocument[]): Promise<DocumentsMarks>;
   getDecoration?(type: DecorationType): vscode.TextEditorDecorationType;
 }
 

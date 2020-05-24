@@ -56,11 +56,16 @@ export class DocumentMarkProcessor implements IDisposable {
     return decorationMap;
   }
 
-  getDocumentsMarks(documents: vscode.TextDocument[]) {
+  async getDocumentsMarks(documents: vscode.TextDocument[]) {
     const documentsMarks: DocumentsMarks = new Map();
 
-    for (const provider of this._providers) {
-      const result = provider.getDocumentsMarks(documents);
+    const promises = this._providers.map(provider =>
+      provider.getDocumentsMarks(documents)
+    );
+
+    const results = await Promise.all(promises);
+
+    for (const result of results) {
       for (const [fileName, marksOptions] of result) {
         let marks = documentsMarks.get(fileName);
         if (!marks) {
@@ -73,8 +78,8 @@ export class DocumentMarkProcessor implements IDisposable {
     return documentsMarks;
   }
 
-  updateDecorations(documents: vscode.TextDocument[]) {
-    const documentsMarks = this.getDocumentsMarks(documents);
+  async updateDecorations(documents: vscode.TextDocument[]) {
+    const documentsMarks = await this.getDocumentsMarks(documents);
 
     for (const textEditor of vscode.window.visibleTextEditors) {
       const marks = documentsMarks.get(textEditor.document.fileName);

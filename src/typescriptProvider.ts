@@ -17,17 +17,26 @@ export class TypescriptProvider implements IDisposable, Provider {
     this._host = new CompilerHost(this._compilerOptions);
   }
 
-  getDocumentsMarks(documents: vscode.TextDocument[]): DocumentsMarks {
+  async getDocumentsMarks(
+    documents: vscode.TextDocument[]
+  ): Promise<DocumentsMarks> {
     const program = this._host.createProgram(documents);
 
     const walker = new Walker(program);
 
     const marks: DocumentsMarks = new Map();
 
-    for (const document of documents) {
-      const result = walker.walk(document);
-      marks.set(document.fileName, result);
-    }
+    const promises = documents.map(
+      document =>
+        new Promise(resolve => {
+          const result = walker.walk(document);
+          marks.set(document.fileName, result);
+          resolve();
+        })
+    );
+
+    await Promise.all(promises);
+
     return marks;
   }
 
