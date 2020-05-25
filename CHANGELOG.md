@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/edgardmessias/vscode.override-mark/compare/v1.1.1...v1.2.0) (2020-05-25)
+
+
+### Features
+
+* Better support for javascript (js and jsx) projects ([16086da](https://github.com/edgardmessias/vscode.override-mark/commit/16086da4c8b6c47eebb566cd60565c4fddcd48f2))
+
+
+
 ## [1.1.1](https://github.com/edgardmessias/vscode.override-mark/compare/v1.1.0...v1.1.1) (2020-05-24)
 
 
