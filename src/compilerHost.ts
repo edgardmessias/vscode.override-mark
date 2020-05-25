@@ -1,15 +1,20 @@
 /* eslint-disable prettier/prettier */
-import * as vscode from "vscode";
 import {
   CompilerHost as BaseCompilerHost,
   CompilerOptions,
+  ModuleResolutionCache,
+  ResolvedModule,
+  ResolvedProjectReference,
+  ResolvedTypeReferenceDirective,
   SourceFile,
 } from "typescript";
-import { tsModule } from "./vscodeModules";
+import * as vscode from "vscode";
 import { isSamePath } from "./util";
+import { tsModule } from "./vscodeModules";
 
 export class CompilerHost implements BaseCompilerHost {
   private _host: BaseCompilerHost;
+  private _resulutionCache: ModuleResolutionCache;
 
   constructor(readonly compilerOptions: CompilerOptions) {
     if (tsModule.createIncrementalCompilerHost) {
@@ -24,6 +29,11 @@ export class CompilerHost implements BaseCompilerHost {
         (this as any)[prop] = (this._host as any)[prop];
       }
     }
+
+    this._resulutionCache = tsModule.createModuleResolutionCache(
+      this.getCurrentDirectory(),
+      s => this.getCanonicalFileName(s)
+    );
   }
 
   getSourceFile(
@@ -120,6 +130,74 @@ export class CompilerHost implements BaseCompilerHost {
       includes,
       depth
     );
+  }
+
+  resolveModuleNames(
+    moduleNames: string[],
+    containingFile: string,
+    reusedNames: string[] | undefined,
+    redirectedReference: ResolvedProjectReference | undefined,
+    options: CompilerOptions
+  ) {
+    if (this._host.resolveModuleNames) {
+      const resolved = this._host.resolveModuleNames(
+        moduleNames,
+        containingFile,
+        reusedNames,
+        redirectedReference,
+        options
+      );
+      return resolved;
+    }
+
+    const typeNames = this.resolveTypeReferenceDirectives(
+      moduleNames,
+      containingFile,
+      redirectedReference,
+      options
+    );
+
+    return moduleNames.map((m, index) => {
+      if (typeNames[index]) {
+        return typeNames[index] as ResolvedModule;
+      }
+
+      const resolved = tsModule.resolveModuleName(
+        m,
+        containingFile,
+        options,
+        this,
+        this._resulutionCache,
+        redirectedReference
+      );
+      if (resolved.resolvedModule) {
+        return resolved.resolvedModule;
+      }
+
+      return undefined;
+    });
+  }
+
+  resolveTypeReferenceDirectives(
+    typeReferenceDirectiveNames: string[],
+    containingFile: string,
+    redirectedReference: ResolvedProjectReference | undefined,
+    options: CompilerOptions
+  ): (ResolvedTypeReferenceDirective | undefined)[] {
+    return typeReferenceDirectiveNames.map(type => {
+      const typeResolved = tsModule.resolveTypeReferenceDirective(
+        type,
+        containingFile,
+        options,
+        this,
+        redirectedReference
+      );
+      if (typeResolved.resolvedTypeReferenceDirective) {
+        return typeResolved.resolvedTypeReferenceDirective;
+      }
+
+      return undefined;
+    });
   }
 
   createProgram(documents: vscode.TextDocument | vscode.TextDocument[]) {
