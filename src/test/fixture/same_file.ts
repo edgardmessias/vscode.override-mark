@@ -45,10 +45,6 @@ export class BothClass extends BaseClass implements BaseInterface {
     super();
   }
 
-  public get alpha() {
-    return "zeta";
-  }
-
   public get delta() {
     return "delta";
   }
