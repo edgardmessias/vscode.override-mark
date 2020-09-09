@@ -83,7 +83,7 @@ suite("Extension Tests", function () {
     const result = walker.walk(document);
 
     const override = result.filter(r => r.type === DecorationType.override);
-    assert.equal(override.length, 6);
+    assert.equal(override.length, 5);
 
     const implement = result.filter(r => r.type === DecorationType.implement);
     assert.equal(implement.length, 4);

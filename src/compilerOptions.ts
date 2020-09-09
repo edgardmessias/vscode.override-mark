@@ -8,6 +8,7 @@ const compilerOptions: CompilerOptions = {
   allowNonTsExtensions: true,
   allowSyntheticDefaultImports: true,
   allowJs: true,
+  jsx: tsModule.JsxEmit.React,
   lib: ["lib.es6.d.ts"],
   target: tsModule.ScriptTarget.Latest,
   moduleResolution: tsModule.ModuleResolutionKind.NodeJs,
