@@ -1,3 +1,12 @@
+## [1.2.1](https://github.com/edgardmessias/vscode.override-mark/compare/v1.2.0...v1.2.1) (2020-09-09)
+
+
+### Bug Fixes
+
+* Fixed react compatibility (close [#51](https://github.com/edgardmessias/vscode.override-mark/issues/51)) ([08d0907](https://github.com/edgardmessias/vscode.override-mark/commit/08d0907a69be6ccb5df318e6463d8b8e6cd7b52e))
+
+
+
 # [1.2.0](https://github.com/edgardmessias/vscode.override-mark/compare/v1.1.1...v1.2.0) (2020-05-25)
 
 
