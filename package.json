@@ -86,7 +86,7 @@
         "@types/sinon": "^9.0.5",
         "@types/vscode": "1.26.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
-        "@typescript-eslint/parser": "^2.34.0",
+        "@typescript-eslint/parser": "^4.2.0",
         "conventional-changelog-cli": "^2.1.0",
         "decache": "^4.6.0",
         "eslint": "^7.9.0",
