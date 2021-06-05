@@ -55,6 +55,118 @@
                         "type": "integer",
                         "description": "The delay in milliseconds between when a change occurs and when a mark update is performed.",
                         "default": 500
+                    },
+                    "override-mark.style.override": {
+                        "description": "The style of the name of an overriding method.",
+                        "default": "bold",
+                        "anyOf": [{
+                                "title": "fontStyle",
+                                "type": "string",
+                                "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
+                                "examples": ["italic", "underline"],
+                                "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
+                                "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
+                            },
+                            {
+                                "type": "object",
+                                "description": "Colors and styles for the name of the overriden method.",
+                                "properties": {
+                                    "foreground": {
+                                        "type": "string",
+                                        "description": "Foreground color.",
+                                        "format": "color-hex"
+                                    },
+                                    "background": {
+                                        "type": "string",
+                                        "description": "Background color.",
+                                        "format": "color-hex"
+                                    },
+                                    "fontStyle": {
+                                        "type": "string",
+                                        "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
+                                        "examples": ["bold", "italic", "underline"],
+                                        "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
+                                        "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
+                                    },
+                                    "bold": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to bold. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "italic": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to italic. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "underline": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to underline. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "border": {
+                                        "type": "string",
+                                        "description": "CSS styling property that will be applied to the enclosed text."
+                                    },
+                                    "borderRadius": {
+                                        "type": "string",
+                                        "description": "CSS styling property that will be applied to the enclosed text."
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "override-mark.style.implement": {
+                        "description": "The style of the name of an implementing method.",
+                        "default": "bold",
+                        "anyOf": [{
+                                "title": "fontStyle",
+                                "type": "string",
+                                "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
+                                "examples": ["italic", "underline"],
+                                "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
+                                "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
+                            },
+                            {
+                                "type": "object",
+                                "description": "Colors and styles for the name of the overriden method.",
+                                "properties": {
+                                    "foreground": {
+                                        "type": "string",
+                                        "description": "Foreground color.",
+                                        "format": "color-hex"
+                                    },
+                                    "background": {
+                                        "type": "string",
+                                        "description": "Background color.",
+                                        "format": "color-hex"
+                                    },
+                                    "fontStyle": {
+                                        "type": "string",
+                                        "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
+                                        "examples": ["bold", "italic", "underline"],
+                                        "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
+                                        "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
+                                    },
+                                    "bold": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to bold. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "italic": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to italic. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "underline": {
+                                        "type": "boolean",
+                                        "description": "Sets or unsets the font style to underline. Note, the presence of 'fontStyle' overrides this setting."
+                                    },
+                                    "border": {
+                                        "type": "string",
+                                        "description": "CSS styling property that will be applied to the enclosed text."
+                                    },
+                                    "borderRadius": {
+                                        "type": "string",
+                                        "description": "CSS styling property that will be applied to the enclosed text."
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }
