@@ -1,6 +1,4 @@
-<svg width="12px" height="12px" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="50" cy="50" r="48" fill="#8cd3ec" stroke="#42545c" stroke-width="3" />
-  <text x="50" y="75" font-size="85" text-anchor="middle" style="font-family: Menlo, Monaco, Consolas, &quot;Droid Sans Mono&quot;, &quot;Inconsolata&quot;, &quot;Courier New&quot;, monospace, &quot;Droid Sans Fallback&quot;;font-weight: bold;" fill="#42545c">
-    O
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 120 120">
+  <circle cx="60" cy="60" fill="#8cd3ec" stroke="#42545c" stroke-width="4" r="58" />
+  <path aria-label="O" fill="#42545c" d="M60 37c-3.5 0-7 2-9 6s-2 9-2 17 0 13 2 17 5.5 6 9 6 7-2 9-6 2-9 2-17 0-13-2-17-5.5-6-9-6zM33 60c0-12 3-22 7-28s12-10 20-10 16 4 20 10 7 16 7 28-3 22-7 28-12 10-20 10-16-4-20-10-7-16-7-28z" />
 </svg>
