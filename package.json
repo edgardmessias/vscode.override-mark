@@ -3,11 +3,13 @@
     "name": "override-mark",
     "displayName": "Override Mark",
     "description": "Show a gutter icon when has a implement/override method/property in javascript or typescript.",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "icon": "resources/override-mark.png",
-    "extensionKind": "ui",
+    "extensionKind": [
+        "ui"
+    ],
     "engines": {
-        "vscode": "^1.26.0"
+        "vscode": "^1.46.0"
     },
     "bugs": {
         "url": "https://github.com/edgardmessias/vscode.override-mark/issues"
@@ -56,15 +58,19 @@
                         "description": "The delay in milliseconds between when a change occurs and when a mark update is performed.",
                         "default": 500
                     },
-                    "override-mark.style.override": {
-                        "description": "The style of the name of an overriding method.",
+                    "override-mark.style.implement": {
+                        "description": "The style of the name of an implementing method.",
                         "default": "bold",
-                        "anyOf": [{
+                        "anyOf": [
+                            {
                                 "title": "fontStyle",
                                 "type": "string",
                                 "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                "examples": ["italic", "underline"],
-                                "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
+                                "examples": [
+                                    "italic",
+                                    "underline"
+                                ],
+                                "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
                                 "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                             },
                             {
@@ -84,8 +90,12 @@
                                     "fontStyle": {
                                         "type": "string",
                                         "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                        "examples": ["bold", "italic", "underline"],
-                                        "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
+                                        "examples": [
+                                            "bold",
+                                            "italic",
+                                            "underline"
+                                        ],
+                                        "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
                                         "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                                     },
                                     "bold": {
@@ -112,15 +122,19 @@
                             }
                         ]
                     },
-                    "override-mark.style.implement": {
-                        "description": "The style of the name of an implementing method.",
+                    "override-mark.style.override": {
+                        "description": "The style of the name of an overriding method.",
                         "default": "bold",
-                        "anyOf": [{
+                        "anyOf": [
+                            {
                                 "title": "fontStyle",
                                 "type": "string",
                                 "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                "examples": ["italic", "underline"],
-                                "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
+                                "examples": [
+                                    "italic",
+                                    "underline"
+                                ],
+                                "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
                                 "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                             },
                             {
@@ -140,8 +154,12 @@
                                     "fontStyle": {
                                         "type": "string",
                                         "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                        "examples": ["bold", "italic", "underline"],
-                                        "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
+                                        "examples": [
+                                            "bold",
+                                            "italic",
+                                            "underline"
+                                        ],
+                                        "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
                                         "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                                     },
                                     "bold": {
@@ -192,35 +210,35 @@
         "@types/istanbul-lib-instrument": "^1.7.4",
         "@types/istanbul-lib-report": "^3.0.0",
         "@types/istanbul-lib-source-maps": "^4.0.1",
-        "@types/istanbul-reports": "^3.0.0",
-        "@types/mocha": "^8.2.0",
-        "@types/node": "~8.10.59",
-        "@types/sinon": "^9.0.10",
-        "@types/vscode": "1.26.0",
+        "@types/istanbul-reports": "^3.0.1",
+        "@types/mocha": "^8.2.2",
+        "@types/node": "^8.10.66",
+        "@types/sinon": "^9.0.11",
+        "@types/vscode": "1.46.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
         "conventional-changelog-cli": "^2.1.1",
         "decache": "^4.6.0",
-        "eslint": "^7.18.0",
+        "eslint": "^7.28.0",
         "eslint-config-prettier": "^7.2.0",
-        "eslint-plugin-prettier": "^3.3.1",
-        "glob": "^7.1.6",
+        "eslint-plugin-prettier": "^3.4.0",
+        "glob": "^7.1.7",
         "istanbul-lib-coverage": "^3.0.0",
         "istanbul-lib-hook": "^3.0.0",
         "istanbul-lib-instrument": "^4.0.3",
         "istanbul-lib-report": "^3.0.0",
         "istanbul-lib-source-maps": "^4.0.0",
         "istanbul-reports": "^3.0.2",
-        "mocha": "^8.1.3",
+        "mocha": "^9.0.0",
         "mocha-multi-reporters": "^1.5.1",
         "original-fs": "^1.1.0",
-        "prettier": "^2.2.1",
-        "release-it": "^14.2.2",
+        "prettier": "^2.3.1",
+        "release-it": "^14.8.0",
         "rimraf": "^3.0.2",
         "sinon": "^9.2.4",
         "source-map-support": "^0.5.19",
-        "typescript": "^4.0.5",
-        "vscode-test": "^1.5.0"
+        "typescript": "^4.3.2",
+        "vscode-test": "^1.5.2"
     },
     "dependencies": {}
 }

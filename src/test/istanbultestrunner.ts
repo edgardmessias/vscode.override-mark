@@ -65,9 +65,8 @@ export function run(testsRoot: string, clb: Function): any {
   require("source-map-support").install();
 
   // Read configuration for the coverage file
-  const coverOptions: ITestRunnerOptions | undefined = _readCoverOptions(
-    testsRoot
-  );
+  const coverOptions: ITestRunnerOptions | undefined =
+    _readCoverOptions(testsRoot);
   let coverageRunner: CoverageRunner;
   if (coverOptions && coverOptions.enabled) {
     // Setup coverage pre-test, including post-test hook to report
@@ -247,9 +246,9 @@ class CoverageRunner {
 
     fs.writeFileSync(coverageFile, JSON.stringify(cov), "utf8");
 
-    const tsMap = ((await mapStore.transformCoverage(
+    const tsMap = (await mapStore.transformCoverage(
       map
-    )) as any) as istanbulCoverage.CoverageMap;
+    )) as any as istanbulCoverage.CoverageMap;
 
     const context = istanbulReport.createContext({
       coverageMap: tsMap,
@@ -260,9 +259,11 @@ class CoverageRunner {
       self.options.reports instanceof Array ? self.options.reports : ["lcov"];
 
     reportTypes.forEach(reporter =>
-      (istanbulReports.create(reporter as any, {
-        projectRoot: paths.join(__dirname, "..", ".."),
-      }) as any).execute(context)
+      (
+        istanbulReports.create(reporter as any, {
+          projectRoot: paths.join(__dirname, "..", ".."),
+        }) as any
+      ).execute(context)
     );
   }
 }

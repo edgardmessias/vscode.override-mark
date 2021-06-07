@@ -35,7 +35,13 @@ This extension contributes the following settings (default values):
 ```js
 {
   // The delay in milliseconds between when a change occurs and when a mark update is performed.
-  "override-mark.delay": 500
+  "override-mark.delay": 500,
+
+  // The style of the name of an implementing method.
+  "override-mark.style.implement": "bold",
+
+  // The style of the name of an overriding method.
+  "override-mark.style.override": "bold"
 }
 ```
 <!--end-settings-->

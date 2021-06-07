@@ -28,7 +28,7 @@ export class TypescriptProvider implements IDisposable, Provider {
 
     const promises = documents.map(
       document =>
-        new Promise(resolve => {
+        new Promise<void>(resolve => {
           const result = walker.walk(document);
           marks.set(document.fileName, result);
           resolve();
