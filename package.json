@@ -212,8 +212,8 @@
         "@types/istanbul-lib-source-maps": "^4.0.1",
         "@types/istanbul-reports": "^3.0.1",
         "@types/mocha": "^8.2.2",
-        "@types/node": "~8.10.59",
-        "@types/sinon": "^9.0.10",
+        "@types/node": "^8.10.66",
+        "@types/sinon": "^9.0.11",
         "@types/vscode": "1.42.0",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
@@ -232,13 +232,13 @@
         "mocha": "^9.0.0",
         "mocha-multi-reporters": "^1.5.1",
         "original-fs": "^1.1.0",
-        "prettier": "^2.2.1",
+        "prettier": "^2.3.1",
         "release-it": "^14.8.0",
         "rimraf": "^3.0.2",
         "sinon": "^9.2.4",
         "source-map-support": "^0.5.19",
-        "typescript": "^4.0.5",
-        "vscode-test": "^1.5.0"
+        "typescript": "^4.3.2",
+        "vscode-test": "^1.5.2"
     },
     "dependencies": {}
 }

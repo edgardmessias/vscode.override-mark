@@ -187,14 +187,16 @@ export class Walker {
             if (isInterface) {
               type = DecorationType.implement;
             } else {
-              const isAbstract = symb.declarations.some(d => {
-                return (
-                  d.modifiers &&
-                  d.modifiers.some(
-                    m => m.kind === tsModule.SyntaxKind.AbstractKeyword
-                  )
-                );
-              });
+              const isAbstract =
+                symb.declarations &&
+                symb.declarations.some(d => {
+                  return (
+                    d.modifiers &&
+                    d.modifiers.some(
+                      m => m.kind === tsModule.SyntaxKind.AbstractKeyword
+                    )
+                  );
+                });
 
               if (isAbstract) {
                 type = DecorationType.implement;

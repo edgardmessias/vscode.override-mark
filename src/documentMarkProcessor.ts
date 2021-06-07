@@ -14,8 +14,8 @@ export class DocumentMarkProcessor implements IDisposable {
   private _providers: Provider[] = [];
 
   private _onDidAddProvider = new vscode.EventEmitter<void>();
-  public readonly onDidAddProvider: vscode.Event<void> = this._onDidAddProvider
-    .event;
+  public readonly onDidAddProvider: vscode.Event<void> =
+    this._onDidAddProvider.event;
 
   addProvider(provider: Provider) {
     this._providers.push(provider);
