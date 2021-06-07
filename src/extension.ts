@@ -4,6 +4,7 @@ import { WorkspaceWatcher } from "./workspaceWatcher";
 import { DocumentMarkProcessor } from "./documentMarkProcessor";
 import { TypescriptProvider } from "./typescriptProvider";
 import { OverrideMarkApi } from "./overrider-mark";
+import { loadDecorationConfig } from "./decoration";
 
 // this method is called when your extension is activated
 export function activate(context: vscode.ExtensionContext): OverrideMarkApi {
@@ -33,10 +34,14 @@ export function activate(context: vscode.ExtensionContext): OverrideMarkApi {
 
   workspaceWatcher.delay = getDelay();
 
+  loadDecorationConfig();
+
   disposable.push(
     vscode.workspace.onDidChangeConfiguration(e => {
       if (e.affectsConfiguration("override-mark")) {
         workspaceWatcher.delay = getDelay();
+        loadDecorationConfig();
+        workspaceWatcher.queueVisibleDocuments();
       }
     })
   );
