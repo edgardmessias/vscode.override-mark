@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/edgardmessias/vscode.override-mark/compare/v1.2.1...v1.3.0) (2021-06-07)
+
+
+### Features
+
+* add options for styling marks ([6695c03](https://github.com/edgardmessias/vscode.override-mark/commit/6695c0399eb0e08b66369d2a2af281bd3e0ba5b7))
+
+
+
 ## [1.2.1](https://github.com/edgardmessias/vscode.override-mark/compare/v1.2.0...v1.2.1) (2020-09-09)
 
 
