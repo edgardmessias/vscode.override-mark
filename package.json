@@ -59,11 +59,15 @@
                     "override-mark.style.override": {
                         "description": "The style of the name of an overriding method.",
                         "default": "bold",
-                        "anyOf": [{
+                        "anyOf": [
+                            {
                                 "title": "fontStyle",
                                 "type": "string",
                                 "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                "examples": ["italic", "underline"],
+                                "examples": [
+                                    "italic",
+                                    "underline"
+                                ],
                                 "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
                                 "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                             },
@@ -84,7 +88,11 @@
                                     "fontStyle": {
                                         "type": "string",
                                         "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                        "examples": ["bold", "italic", "underline"],
+                                        "examples": [
+                                            "bold",
+                                            "italic",
+                                            "underline"
+                                        ],
                                         "pattern": "^(\\s*(italic|bold|underline))*\\s*$",
                                         "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                                     },
@@ -115,11 +123,15 @@
                     "override-mark.style.implement": {
                         "description": "The style of the name of an implementing method.",
                         "default": "bold",
-                        "anyOf": [{
+                        "anyOf": [
+                            {
                                 "title": "fontStyle",
                                 "type": "string",
                                 "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                "examples": ["italic", "underline"],
+                                "examples": [
+                                    "italic",
+                                    "underline"
+                                ],
                                 "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
                                 "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                             },
@@ -140,7 +152,11 @@
                                     "fontStyle": {
                                         "type": "string",
                                         "description": "Sets the all font styles: 'italic', 'bold' or 'underline' or a combination. All styles that are not listed are unset. The empty string unsets all styles.",
-                                        "examples": ["bold", "italic", "underline"],
+                                        "examples": [
+                                            "bold",
+                                            "italic",
+                                            "underline"
+                                        ],
                                         "pattern": "^(\\\\s*(italic|bold|underline))*\\\\s*$",
                                         "patternErrorMessage": "Font style must be 'italic', 'bold' or 'underline' or a combination. The empty string unsets all styles."
                                     },
@@ -215,7 +231,7 @@
         "mocha-multi-reporters": "^1.5.1",
         "original-fs": "^1.1.0",
         "prettier": "^2.2.1",
-        "release-it": "^14.2.2",
+        "release-it": "^14.8.0",
         "rimraf": "^3.0.2",
         "sinon": "^9.2.4",
         "source-map-support": "^0.5.19",
