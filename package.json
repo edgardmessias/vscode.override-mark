@@ -229,7 +229,7 @@
         "istanbul-lib-report": "^3.0.0",
         "istanbul-lib-source-maps": "^4.0.0",
         "istanbul-reports": "^3.0.2",
-        "mocha": "^9.0.0",
+        "mocha": "^9.0.2",
         "mocha-multi-reporters": "^1.5.1",
         "original-fs": "^1.1.0",
         "prettier": "^2.3.1",
