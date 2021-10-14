@@ -219,7 +219,7 @@
         "@typescript-eslint/parser": "^2.34.0",
         "conventional-changelog-cli": "^2.1.1",
         "decache": "^4.6.0",
-        "eslint": "^7.28.0",
+        "eslint": "^8.0.1",
         "eslint-config-prettier": "^7.2.0",
         "eslint-plugin-prettier": "^3.4.0",
         "glob": "^7.1.7",
