@@ -3,17 +3,30 @@ import * as path from "path";
 import { CompilerOptions } from "typescript";
 import { normalizePath } from "./util";
 import { tsModule } from "./vscodeModules";
+import * as vscode from "vscode";
 
 const compilerOptions: CompilerOptions = {
+  forceConsistentCasingInFileNames: true,
+  outDir: "./dist/out-tsc",
+  sourceMap: true,
+  declaration: false,
+  moduleResolution: tsModule.ModuleResolutionKind.NodeJs,
+  emitDecoratorMetadata: true,
+  experimentalDecorators: true,
+  esModuleInterop: true,
+  target: tsModule.ScriptTarget.ES2015,
+  module: tsModule.ModuleKind.ES2020,
+  importHelpers: true,
   allowNonTsExtensions: true,
   allowSyntheticDefaultImports: true,
   allowJs: true,
   jsx: tsModule.JsxEmit.React,
   lib: ["lib.es6.d.ts"],
-  target: tsModule.ScriptTarget.Latest,
-  moduleResolution: tsModule.ModuleResolutionKind.NodeJs,
-  experimentalDecorators: true,
   typeRoots: [],
+  baseUrl: "./src",
+  paths: {
+    "@app/*": ["./app/*"],
+  },
 };
 
 function getNonWindowsCacheLocation(platformIsDarwin: boolean) {
@@ -71,6 +84,13 @@ if (globalTypeRoots) {
   compilerOptions.typeRoots!.push(
     path.join(globalTypeRoots, "node_modules", "@types")
   );
+}
+
+const configurationCompilerOptions = vscode.workspace
+  .getConfiguration("override-mark")
+  .get("compilerOptions", {});
+if (Object.keys(configurationCompilerOptions).length) {
+  Object.assign(compilerOptions, configurationCompilerOptions);
 }
 
 export function getCompilerOptions() {

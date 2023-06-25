@@ -3,13 +3,13 @@
     "name": "override-mark",
     "displayName": "Override Mark",
     "description": "Show a gutter icon when has a implement/override method/property in javascript or typescript.",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "icon": "resources/override-mark.png",
     "extensionKind": [
         "ui"
     ],
     "engines": {
-        "vscode": "^1.46.0"
+        "vscode": "^1.79.1"
     },
     "bugs": {
         "url": "https://github.com/edgardmessias/vscode.override-mark/issues"
@@ -53,6 +53,11 @@
             {
                 "title": "Override Mark",
                 "properties": {
+                    "override-mark.compilerOptions": {
+                        "type": "object",
+                        "description": "Typescript compilerOptions",
+                        "default": {}
+                    },
                     "override-mark.delay": {
                         "type": "integer",
                         "description": "The delay in milliseconds between when a change occurs and when a mark update is performed.",
@@ -214,9 +219,10 @@
         "@types/mocha": "^8.2.2",
         "@types/node": "^8.10.66",
         "@types/sinon": "^9.0.11",
-        "@types/vscode": "1.46.0",
+        "@types/vscode": "1.79.1",
         "@typescript-eslint/eslint-plugin": "^2.34.0",
         "@typescript-eslint/parser": "^2.34.0",
+        "@vscode/test-electron": "^2.3.3",
         "conventional-changelog-cli": "^2.1.1",
         "decache": "^4.6.0",
         "eslint": "^7.28.0",
@@ -237,8 +243,7 @@
         "rimraf": "^3.0.2",
         "sinon": "^9.2.4",
         "source-map-support": "^0.5.19",
-        "typescript": "^4.3.2",
-        "vscode-test": "^1.5.2"
+        "typescript": "^4.3.2"
     },
     "dependencies": {}
 }

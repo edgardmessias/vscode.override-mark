@@ -46,7 +46,7 @@ suite("Extension Tests", function () {
       return this.skip();
     }
     document = await vscode.workspace.openTextDocument(
-      __dirname + "/../../src/test/fixture/same_file.ts"
+      __dirname + "/../../src/app/same_file.ts"
     );
     assert.ok(document);
   });
