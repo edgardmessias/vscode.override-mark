@@ -1,22 +1,5 @@
-export interface BaseInterface {
-  delta: string;
-  epsilon(): string;
-}
-
-export class BaseClass {
-  constructor() {
-    // nothing
-  }
-
-  public alpha = "alpha";
-
-  beta() {
-    return "beta";
-  }
-  public gamma() {
-    return "gamma";
-  }
-}
+import { BaseClass } from "@app/base-dir/base_class";
+import { BaseInterface } from "@app/base-dir/base_interface";
 
 export class ExtendedClass extends BaseClass {
   constructor() {
